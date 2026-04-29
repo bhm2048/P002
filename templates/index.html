@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Hello, Vibe Coding!{% endblock %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-4 fw-bold">Hello, Vibe Coding!</h1>
+    <p class="lead text-muted mt-3">目前時間</p>
+    <p id="current-time" class="fs-3 text-primary">載入中...</p>
+    <button class="btn btn-outline-primary mt-3" onclick="fetchTime()">重新取得時間</button>
+</div>
+
+<script>
+    async function fetchTime() {
+        const res = await fetch("/api/time");
+        const data = await res.json();
+        document.getElementById("current-time").textContent = `${data.date} ${data.time}`;
+    }
+    fetchTime();
+</script>
+{% endblock %}
